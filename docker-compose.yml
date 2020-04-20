@@ -1,0 +1,63 @@
+version: '3'
+services:
+  #PHP Service
+  app:
+    image: cheanizer/php-laravel
+    container_name: disaster-app
+    restart: unless-stopped
+    tty: true
+    build :
+      context : ./docker/php/
+      dockerfile : Dockerfile
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - disaster-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: disaster-webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - disaster-network
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: disaster-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: jamansudahberubah
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - C:\data:/var/lib/mysql/
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - disaster-network
+
+#Docker Networks
+networks:
+  disaster-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local
