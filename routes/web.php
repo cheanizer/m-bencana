@@ -17,9 +17,20 @@ Route::get('/', function () {
     return view('landing.index');
 });
 
+Route::group([
+    'prefix' => 'auth',
+    'namespace' => 'Auth'
+],function(){
+    Route::post('login',[
+        'uses' => 'LoginController@authenticate',
+        'as' => 'auth.authenticate'
+    ]);
+});
+
+
 Route::get('/master',function() {
     return view('master.masterlayout');
-});
+})->name('master');
 
 Route::get('/login',function() {
     return view('auth.login');

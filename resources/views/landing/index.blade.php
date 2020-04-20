@@ -71,27 +71,41 @@
         <div class="span3">
             <div class="content">
                 <div class="module">
-                        <form class="form-vertical">
+                    @auth
+                    <div class="module-head">
+                        <h3>Menu</h3>
+                    </div>
+                    <div class="module-body">
+                        Selamat datang
+                        <br />
+                        {{Auth::user()->name}} <a href="#">[logout]</a>
+                    </div>
+                    @endauth
+                    @guest
+                        <form class="form-vertical" action="{{route('auth.authenticate')}}" method="POST">
+                            @csrf
                             <div class="module-head">
                                 <h3>Masuk</h3>
                             </div>
                             <div class="module-body">
+                                @if (session('errlogin'))
+                                <div class="alert alert-warning">{{session('errlogin')}}</div>
+                            @endif
                                 <div class="control-group">
                                     <div class="controls row-fluid">
-                                        <input class="span12" type="text" id="inputEmail" placeholder="Username">
+                                        <input class="span12" type="text" name="username" id="inpUsername" placeholder="Username">
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <div class="controls row-fluid">
-                                        <input class="span12" type="password" id="inputPassword" placeholder="Password">
+                                        <input class="span12" type="password" name="password" id="inputPassword" placeholder="Password">
                                     </div>
                                 </div>
                             </div>
                             <div class="module-foot">
                                 <div class="control-group">
                                     <div class="controls clearfix">
-<!--                                        <button type="submit" class="btn btn-primary pull-right">Login</button> -->
-                                        <a href="{{route('dashboard')}}" class="btn btn-primary pull-right">Login</a>
+                                        <button type="submit" class="btn btn-primary pull-right">Login</button>
                                         <label class="checkbox">
                                             <input type="checkbox"> Remember me
                                         </label>
@@ -99,7 +113,7 @@
                                 </div>
                             </div>
                         </form>
-
+                    @endguest
                 </div>
             </div>
         </div>
