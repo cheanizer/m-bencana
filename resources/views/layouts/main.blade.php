@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edmin</title>
+        <title>M-Bencana.Org</title>
         <link type="text/css" href="{{url('/') . '/template/edmin/code/'}}bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="{{url('/') . '/template/edmin/code/'}}bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="{{url('/') . '/template/edmin/code/'}}css/theme.css" rel="stylesheet">
