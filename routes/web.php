@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing.index');
-});
+})->name('landing');
 
 Route::group([
     'prefix' => 'auth',
@@ -25,7 +25,18 @@ Route::group([
         'uses' => 'LoginController@authenticate',
         'as' => 'auth.authenticate'
     ]);
+    Route::group([
+        'middleware'=>'auth'
+    ],function(){
+        Route::post('logout',[
+            'as' => 'auth.logout',
+            'uses' => 'LoginController@logout'
+        ]);
+    });
 });
+
+
+
 
 
 Route::get('/master',function() {

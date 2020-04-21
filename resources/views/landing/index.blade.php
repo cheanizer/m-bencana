@@ -78,7 +78,14 @@
                     <div class="module-body">
                         Selamat datang
                         <br />
-                        {{Auth::user()->name}} <a href="#">[logout]</a>
+                        {{Auth::user()->name}}
+                        <hr />
+                        <div class="text-center">
+                        <form action="{{route('auth.logout')}}" method="post">
+                            @csrf
+                            <button class="btn btn-default" type="submit">logout</button>
+                        </form>
+                        </div>
                     </div>
                     @endauth
                     @guest

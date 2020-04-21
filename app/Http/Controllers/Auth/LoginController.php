@@ -18,4 +18,10 @@ class LoginController extends Controller
 
         return redirect()->back()->with('errlogin', __("Username dan Password tidak ditemukan!"));
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('landing');
+    }
 }
