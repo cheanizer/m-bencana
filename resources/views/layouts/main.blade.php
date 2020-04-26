@@ -25,7 +25,8 @@
         <!--/.wrapper-->
         <div class="footer">
             <div class="container">
-                <b class="copyright">&copy; {{date('Y')}} Universitas Mercu Buana Yogyakarta </b>.
+                <b class="copyright">&copy; {{date('Y')}} <a href="https://fti.mercubuana-yogya.ac.id/" target="_blank">Fakultas Teknologi Informasi</a> |
+                    <a href="https://mercubuana-yogya.ac.id/" target="_blank">Universitas Mercu Buana Yogyakarta </a> </b>.
             </div>
         </div>
         <script src="{{url('/') . '/template/edmin/code/'}}scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
