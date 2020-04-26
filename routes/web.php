@@ -17,6 +17,38 @@ Route::get('/', function () {
     return view('landing.index');
 })->name('landing');
 
+
+Route::group([
+    'middleware' => 'auth'
+],function(){
+    Route::group([
+        'prefix' => 'user',
+        'namespace' => 'User'
+    ],function(){
+        Route::get('',[
+            'uses' => 'UserController@index',
+            'as' => 'user'
+        ]);
+        Route::get('create',[
+            'uses' => 'UserController@create',
+            'as' => 'user.create'
+        ]);
+        Route::get('edit/{id}',[
+             'uses' => 'UserController@edit',
+             'as' => 'user.edit'
+        ]);
+        Route::post('create',[
+            'uses'=> 'UserController@doCreate',
+            'as' => 'user.create.do'
+        ]);
+        Route::post('edit/{id}',[
+            'uses' => 'UserController@doEdit',
+            'as' => 'user.edit.do'
+        ]);
+    });
+});
+
+
 Route::group([
     'prefix' => 'auth',
     'namespace' => 'Auth'
@@ -32,8 +64,22 @@ Route::group([
             'as' => 'auth.logout',
             'uses' => 'LoginController@logout'
         ]);
+        Route::group([
+            'prefix' => 'profile'
+        ],function(){
+            Route::get('',[
+                'uses' => 'ProfileController@index',
+                'as' => 'auth.profile'
+            ]);
+            Route::post('',[
+                'uses' => 'ProfileController@update',
+                'as' => 'auth.profile.update'
+            ]);
+        });
     });
 });
+
+
 
 
 

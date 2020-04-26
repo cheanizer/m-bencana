@@ -26,7 +26,7 @@
                             <li><a href="#">Jenis Bantuan</a></li>
                             <li><a href="#">Lokasi Pengungsian</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Pengguna</a></li>
+                            <li><a href="{{route('user')}}">Pengguna</a></li>
                             <li><a href="#">Pengaturan Aplikasi</a></li>
                         </ul>
                     </li>
@@ -35,11 +35,9 @@
                         <img src="{{url('/') . '/template/edmin/code/'}}images/user.png" class="nav-avatar" />
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Your Profile</a></li>
-                            <li><a href="#">Edit Profile</a></li>
-                            <li><a href="#">Account Settings</a></li>
+                            <li><a href="{{route('auth.profile')}}">Kelola Akun</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="{{route('auth.logout')}}">Logout</a></li>
                         </ul>
                     </li>
                     @endauth
