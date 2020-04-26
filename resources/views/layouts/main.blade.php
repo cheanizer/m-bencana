@@ -35,6 +35,24 @@
         <script src="{{url('/') . '/template/edmin/code/'}}scripts/flot/jquery.flot.js" type="text/javascript"></script>
         <script src="{{url('/') . '/template/edmin/code/'}}scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
         <script src="{{url('/') . '/template/edmin/code/'}}scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="{{url('/') . '/js/date-picker/js/'}}bootstrap-datepicker.js" type="text/javascript"></script>
+        <script>
+            $('document').ready(function(){
+                $(".datepicker").datepicker({
+                    format : 'dd/mm/yyyy'
+                });
+                $('.post-to').click(function(){
+                    var url = $(this).attr('rel-url');
+                    var id = $(this).attr('rel-id');
+                    $("#id-csrf").val(id);
+                    $("#frm-csrf").attr('action',url).submit();
+                });
+            });
+        </script>
+        <form id="frm-csrf" method="POST">
+            @csrf
+            <input id="id-csrf" type="hidden" value="">
+        </form>
         @section('js')
 
         @show

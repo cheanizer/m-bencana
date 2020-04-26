@@ -46,7 +46,35 @@ Route::group([
             'as' => 'user.edit.do'
         ]);
     });
+    Route::group([
+        'prefix' => 'disaster',
+        'namespace' => 'Disaster'
+    ],function(){
+        Route::get('',[
+            'uses' => 'DisasterController@index',
+            'as' => 'disaster'
+        ]);
+        Route::get('create',[
+            'uses' => 'DisasterController@create',
+            'as' => 'disaster.create'
+        ]);
+        Route::post('create',[
+            'uses' => 'DisasterController@doCreate',
+            'as' => 'disaster.create.do'
+        ]);
+
+        Route::get('edit/{id}',[
+            'uses' => 'DisasterController@edit',
+            'as' => 'disaster.edit'
+        ]);
+        Route::post('edit/{id}',[
+            'uses' => 'DisasterController@doEdit',
+            'as' => 'disaster.edit.do'
+        ]);
+    });
 });
+
+
 
 
 Route::group([

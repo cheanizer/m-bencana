@@ -13,7 +13,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($field))
         {
-            return redirect()->intended('master');
+            return redirect()->intended('dashboard');
         }
 
         return redirect()->back()->with('errlogin', __("Username dan Password tidak ditemukan!"));
