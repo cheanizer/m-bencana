@@ -36,8 +36,15 @@
         <script src="{{url('/') . '/template/edmin/code/'}}scripts/flot/jquery.flot.resize.js" type="text/javascript"></script>
         <script src="{{url('/') . '/template/edmin/code/'}}scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="{{url('/') . '/js/date-picker/js/'}}bootstrap-datepicker.js" type="text/javascript"></script>
+        <script src="{{url('/') . '/js/notify/'}}notify.min.js" type="text/javascript"></script>
         <script>
             $('document').ready(function(){
+                @if (session('popup-info'))
+                $('.navbar').notify('{{session('popup-info')}}',{
+                    position : 'bottom-center',
+                    className : 'info'
+                });
+                @endif
                 $(".datepicker").datepicker({
                     format : 'dd/mm/yyyy'
                 });
@@ -47,11 +54,12 @@
                     $("#id-csrf").val(id);
                     $("#frm-csrf").attr('action',url).submit();
                 });
+
             });
         </script>
         <form id="frm-csrf" method="POST">
             @csrf
-            <input id="id-csrf" type="hidden" value="">
+            <input id="id-csrf" name="id" type="hidden" value="">
         </form>
         @section('js')
 

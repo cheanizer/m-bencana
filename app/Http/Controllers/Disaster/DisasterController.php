@@ -33,12 +33,16 @@ class DisasterController extends Controller
             'bencana' => 'required',
             'deskripsi' => 'required',
             'mulai' => 'date',
-            'status' => 'required'
+            'status' => 'required',
+            'default' => 'boolean'
         ];
 
         $request->validate($rules);
         $fields = $request->only(array_keys($rules));
-
+        if ($request->filled('default'))
+        {
+            Disaster::where('default','1')->update(['default' => 0]);
+        }
         $disaster = new Disaster();
         $disaster->fill($fields);
         $disaster->createdby = Auth::user()->id;
@@ -55,15 +59,36 @@ class DisasterController extends Controller
             'bencana' => 'required',
             'deskripsi' => 'required',
             'mulai' => 'date',
-            'status' => 'required'
+            'status' => 'required',
+            'default' => 'boolean'
         ];
 
         $request->validate($rules);
         $fields = $request->only(array_keys($rules));
 
+        if ($request->filled('default') == false)
+        {
+            $fields['default'] = 0;
+        }else {
+            Disaster::where('default','1')->update(['default' => 0]);
+        }
         $disaster->fill($fields);
         $disaster->save();
 
         return redirect()->back()->with('success',__('Sukses edit data bencana'));
+    }
+
+    public function using(Request $request)
+    {
+        $request->validate(
+            [
+                'id' => 'required'
+            ]
+        );
+        $request->session()->forget('disaster');
+        $disaster = Disaster::findOrFail($request->input('id'));
+        $request->session()->put('disaster',$disaster);
+
+        return redirect()->back()->with('popup-info','Becana default : ' . $disaster->bencana);
     }
 }

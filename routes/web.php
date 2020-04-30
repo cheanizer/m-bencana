@@ -71,7 +71,54 @@ Route::group([
             'uses' => 'DisasterController@doEdit',
             'as' => 'disaster.edit.do'
         ]);
+        Route::post('using',[
+            'uses' => 'DisasterController@using',
+            'as' => 'disaster.using'
+        ]);
     });
+
+    Route::group([
+        'prefix' => 'location',
+        'namespace' => 'Location'
+    ],function(){
+        Route::get('/{id}',[
+            'uses' => 'LocationController@index',
+            'as' => 'location'
+        ])->where('id','[0-9]+');
+        Route::get('/{id}/create',[
+            'uses' => 'LocationController@create',
+            'as' => 'location.create'
+        ])->where('id','[0-9]+');
+
+        Route::get('/type',[
+            'uses' => 'LocationTypeController@index',
+            'as' => 'location.type'
+        ]);
+        Route::get('/type/create',[
+            'uses' => 'LocationTypeController@create',
+            'as' => 'location.type.create'
+        ]);
+        Route::post('/type/create',[
+            'uses' => 'LocationTypeController@doCreate',
+            'as' => 'location.type.create.do'
+        ]);
+        Route::get('/type/edit/{id}',[
+            'uses' => 'LocationTypeController@edit',
+            'as' => 'location.type.edit'
+        ]);
+        Route::post('/type/edit/{id}',[
+            'uses' => 'LocationTypeController@doEdit',
+            'as' => 'location.type.edit.do'
+        ]);
+
+        Route::post('/type/delete',[
+            'uses' => 'LocationTypeController@delete',
+            'as' => 'location.type.delete.do'
+        ]);
+
+    });
+
+
 });
 
 

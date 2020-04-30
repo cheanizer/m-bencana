@@ -12,6 +12,14 @@
             {!! Form::textAreaLabel('deskripsi',$disaster->deskripsi,'Deskripsi',['rows' => '4','class' => 'span8'])!!}
             {!! Form::datePickerLabel('mulai',($disaster->mulai ? $disaster->mulai->format('d/n/Y') : '' ),'Mulai') !!}
             {!! Form::selectLabel('status',['' => 'Pilih', '1' => 'Aktif' , '0' => 'Non-Aktif'],$disaster->status)!!}
+            <div class="control-group">
+                {{Form::label('default','Default',['class' => 'control-label'])}}
+                <div class="controls">
+                    <label class="checkbox inline">
+                        {!!Form::checkbox('default',1,$disaster->default)!!}
+                    </label>
+                </div>
+            </div>
             {!! Form::buttonLabel('Proses')!!}
         {!! Form::close() !!}
     </div>

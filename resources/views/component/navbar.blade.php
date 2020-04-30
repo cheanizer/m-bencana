@@ -5,12 +5,44 @@
                 <i class="icon-reorder shaded"></i></a><a class="brand" href="{{url('')}}">Disaster MS </a>
                 <div class="nav-collapse collapse navbar-inverse-collapse">
                 @auth
-                <ul class="nav pull-right">
+                <ul class="nav nav-icons">
+                    <li>
+                        <a href="{{route('dashboard')}}">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                </ul>
 
+                <div class="dropdown">
+                    @php
+                        $disaster = session('disaster');
+                    @endphp
+                    <form class="navbar-search pull-left input-append" action="#">
+                    <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#" id="main-disaster-default">{{ empty ($disaster) ? "Pilih Bencana" : $disaster->bencana}} <i class="icon-caret-down"></i></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="main-disaster-selector">
+                        @foreach (App\Models\Disaster::where('status',1)->get() as $key => $disaster )
+                        <li><a href="#" class="post-to" rel-url="{{route('disaster.using')}}" rel-id="{{$disaster->bencanaid}}">{{$disaster->bencana}}</a></li>
+                        @endforeach
+                    </ul>
+                    </form>
+                </div>
+                <ul class="nav pull-right">
+                    @if (session('disaster'))
+                    @php
+                        $disaster = session('disaster');
+                    @endphp
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Data
+                        <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('location',['id' => $disaster->bencanaid])}}">Lokasi</a></li>
+                        </ul>
+                    </li>
+                    @endif
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrasi
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('disaster')}}">Bencana</a></li>
+                            <li><a href="{{route('location.type')}}">Jenis Lokasi</a></li>
                             <li class="divider"></li>
                             <li><a href="{{route('user')}}">Pengguna</a></li>
                             <li><a href="#">Pengaturan Aplikasi</a></li>

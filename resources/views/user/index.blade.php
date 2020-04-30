@@ -1,7 +1,6 @@
 @extends('layouts.administration')
 
 @section('main-content')
-
         <div class="module message">
             <div class="module-head">
                 <h3>Pengguna</h3>
