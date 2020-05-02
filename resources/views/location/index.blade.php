@@ -32,7 +32,6 @@
                             <a href="{{route('location.edit',['disaster_id' => $disaster->bencanaid ,'id' => $location->lokasiid])}}" class="pull-right span1">
                                 <i class="icon-edit"></i>
                             </a>
-
                             <a href="#" class="pull-right  post-to" rel-url="{{route('location.delete.do',['id' => $location->lokasiid])}}" rel-id="{{$location->locationid}}">
                                 <i class="icon-trash"></i>
                             </a>

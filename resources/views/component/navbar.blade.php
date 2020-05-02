@@ -43,6 +43,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{route('disaster')}}">Bencana</a></li>
                             <li><a href="{{route('location.type')}}">Jenis Lokasi</a></li>
+                            <li><a href="{{route('contact')}}">Kontak</a></li>
                             <li class="divider"></li>
                             <li><a href="{{route('user')}}">Pengguna</a></li>
                             <li><a href="#">Pengaturan Aplikasi</a></li>

@@ -39,12 +39,7 @@
         <script src="{{url('/') . '/js/notify/'}}notify.min.js" type="text/javascript"></script>
         <script>
             $('document').ready(function(){
-                @if (session('popup-info'))
-                $('.navbar').notify('{{session('popup-info')}}',{
-                    position : 'bottom-center',
-                    className : 'info'
-                });
-                @endif
+
                 $(".datepicker").datepicker({
                     format : 'dd/mm/yyyy'
                 });
@@ -63,6 +58,23 @@
             @csrf
             <input id="id-csrf" name="id" type="hidden" value="">
         </form>
+
+        <script>
+            $('document').ready(function(){
+                @if (session('popup-info'))
+                $('.navbar').notify('{{session('popup-info')}}',{
+                    position : 'bottom-center',
+                    className : 'info'
+                });
+                @endif
+                @if (session('popup-warning'))
+                $('.navbar').notify('{{session('popup-warning')}}',{
+                    position : 'bottom-center',
+                    className : 'warn'
+                });
+                @endif
+            });
+        </script>
         @section('js')
 
         @show

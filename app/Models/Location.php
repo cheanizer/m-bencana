@@ -20,6 +20,11 @@ class Location extends Model
         return $query;
     }
 
+    public function scopeDisaster($query,$disaster_id)
+    {
+        return $query->where('bencanaid',$disaster_id);
+    }
+
     public function province()
     {
         return $this->belongsTo(Province::class, 'propcd');

@@ -46,6 +46,37 @@ Route::group([
             'as' => 'user.edit.do'
         ]);
     });
+
+    Route::group([
+        'prefix' => 'contact',
+        'namespace' => 'Contact'
+    ],function(){
+        Route::get('',[
+            'uses' => 'ContactController@index',
+            'as' => 'contact'
+        ]);
+        Route::get('create',[
+            'uses' => 'ContactController@create',
+            'as' => 'contact.create'
+        ]);
+        Route::post('create',[
+            'uses' => 'ContactController@doCreate',
+            'as' => 'contact.create.do'
+        ]);
+        Route::get('edit/{id}',[
+            'uses' => 'ContactController@edit',
+            'as' => 'contact.edit'
+        ]);
+        Route::post('edit/{id}',[
+            'uses' => 'ContactController@doEdit',
+            'as' => 'contact.edit.do'
+        ]);
+        Route::post('delete',[
+            'uses' => 'ContactController@doDelete',
+            'as' => 'contact.delete.do'
+        ]);
+    });
+
     Route::group([
         'prefix' => 'disaster',
         'namespace' => 'Disaster'

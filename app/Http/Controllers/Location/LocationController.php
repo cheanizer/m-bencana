@@ -25,6 +25,7 @@ class LocationController extends DisasterBase
     {
         $this->disaster_id = $disaster_id;
         $locations = Location::filter($request->all())
+        ->disaster($this->disaster_id)
         ->paginate(20);
         return $this->response('location.index',compact('locations'));
     }

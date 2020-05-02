@@ -3,10 +3,10 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="span3">
+            <div class="span2">
                 @include('sidebar.admin')
             </div>
-            <div class="span9">
+            <div class="span10">
                 <div class="content">
                     @section('main-content')
 
