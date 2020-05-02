@@ -11,5 +11,13 @@ class State extends Model
 
     public $timestamps = false;
 
-
+    public function scopeFilter($query, $filter = [])
+    {
+        extract($filter);
+        if (! empty ($provinsi_id))
+        {
+            $query->where('provinsi_id',$provinsi_id);
+        }
+        return $query;
+    }
 }

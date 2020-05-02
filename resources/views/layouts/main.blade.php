@@ -49,6 +49,8 @@
                     format : 'dd/mm/yyyy'
                 });
                 $('.post-to').click(function(){
+                    var pus = confirm('Apakah anda yakin ?');
+                    if (! pus ) return false;
                     var url = $(this).attr('rel-url');
                     var id = $(this).attr('rel-id');
                     $("#id-csrf").val(id);

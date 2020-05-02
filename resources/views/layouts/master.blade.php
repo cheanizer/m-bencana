@@ -25,7 +25,7 @@
                         </table>
                     </div>
                     <ul class="nav nav-list sub-menu">
-                        <li class="active"><a href="#">Lokasi</a></li>
+                        <li class="active"><a href="{{route('location',['id' => $disaster->bencanaid])}}">Lokasi</a></li>
                         <li><a href="#">Observed</a></li>
                     </ul>
                 </div>

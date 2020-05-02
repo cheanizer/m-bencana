@@ -90,6 +90,26 @@ Route::group([
             'as' => 'location.create'
         ])->where('id','[0-9]+');
 
+        Route::post('/{id}/create',[
+            'uses' => 'LocationController@doCreate',
+            'as' => 'location.create.do'
+        ])->where('id','[0-9]+');;
+
+        Route::get('/{disaster_id}/edit/{id}',[
+            'uses' => 'LocationController@edit',
+            'as' => 'location.edit'
+        ])->where('id','[0-9]+')->where('disaster_id','[0-9]+');;
+
+        Route::post('/{disaster_id}/edit/{id}',[
+            'uses' => 'LocationController@doEdit',
+            'as' => 'location.edit.do'
+        ])->where('disaster_id','[0-9]+');
+
+        Route::post('/delete/{id}',[
+            'uses' => 'LocationController@doDelete',
+            'as' => 'location.delete.do'
+        ])->where('id','[0-9]+');
+
         Route::get('/type',[
             'uses' => 'LocationTypeController@index',
             'as' => 'location.type'
@@ -110,12 +130,28 @@ Route::group([
             'uses' => 'LocationTypeController@doEdit',
             'as' => 'location.type.edit.do'
         ]);
-
         Route::post('/type/delete',[
             'uses' => 'LocationTypeController@delete',
             'as' => 'location.type.delete.do'
         ]);
+    });
 
+    Route::group([
+        'prefix' => 'common',
+        'namespace' => 'Common'
+    ],function(){
+        Route::get('api/state',[
+            'uses' => 'AddressApiController@getState',
+            'as' => 'common.api.state'
+        ]);
+        Route::get('api/district',[
+            'uses' => 'AddressApiController@getDistrict',
+            'as' => 'common.api.district'
+        ]);
+        Route::get('api/sub-district',[
+            'uses' => 'AddressApiController@getSubDistrict',
+            'as' => 'common.api.subdistrict'
+        ]);
     });
 
 
