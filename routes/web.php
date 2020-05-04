@@ -75,6 +75,15 @@ Route::group([
             'uses' => 'ContactController@doDelete',
             'as' => 'contact.delete.do'
         ]);
+
+        Route::group([
+            'prefix' => 'rest'
+        ],function(){
+            Route::get('search',[
+                'as' => 'contact.rest.search',
+                'uses' => 'ContactRestController@search'
+            ]);
+        });
     });
 
     Route::group([

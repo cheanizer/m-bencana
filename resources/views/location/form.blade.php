@@ -47,6 +47,12 @@
                         </button>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label">Kontak</label>
+                    <div class="controls">
+                        {!! Form::select('kontakid',\App\Models\Contact::get()->pluck('nama','kontakid'),$location->kontaikid,['placeholder' => 'Pilih Kontak'])!!}
+                    </div>
+                </div>
                 {!! Form::buttonLabel('Proses')!!}
             {!! Form::close()!!}
         </div>
@@ -160,6 +166,7 @@
                 $("#map-modal").hide();
             });
         });
+
     });
     </script>
 

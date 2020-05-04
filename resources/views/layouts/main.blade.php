@@ -9,6 +9,8 @@
         <link type="text/css" href="{{url('/') . '/template/edmin/code/'}}bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="{{url('/') . '/template/edmin/code/'}}css/theme.css" rel="stylesheet">
         <link type="text/css" href="{{url('/') . '/template/edmin/code/'}}images/icons/css/font-awesome.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
         <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
             rel='stylesheet'>
         @section('styles')
@@ -37,6 +39,9 @@
         <script src="{{url('/') . '/template/edmin/code/'}}scripts/datatables/jquery.dataTables.js" type="text/javascript"></script>
         <script src="{{url('/') . '/js/date-picker/js/'}}bootstrap-datepicker.js" type="text/javascript"></script>
         <script src="{{url('/') . '/js/notify/'}}notify.min.js" type="text/javascript"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
         <script>
             $('document').ready(function(){
 

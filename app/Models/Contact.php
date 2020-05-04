@@ -18,6 +18,10 @@ class Contact extends Model
     {
         extract($filter);
 
+        if (! empty ($search))
+        {
+            $query->where('name','like','%'.$search.'%');
+        }
 
         return $query;
 
