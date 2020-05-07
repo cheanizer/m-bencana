@@ -133,7 +133,7 @@ Route::group([
         Route::post('/{id}/create',[
             'uses' => 'LocationController@doCreate',
             'as' => 'location.create.do'
-        ])->where('id','[0-9]+');;
+        ])->where('id','[0-9]+');
 
         Route::get('/{disaster_id}/edit/{id}',[
             'uses' => 'LocationController@edit',
@@ -174,6 +174,40 @@ Route::group([
             'uses' => 'LocationTypeController@delete',
             'as' => 'location.type.delete.do'
         ]);
+    });
+
+    Route::group([
+        'prefix' => 'observasi',
+        'namespace' => 'Observasi'
+    ],function(){
+        Route::group([
+            'middleware' => 'disaster'
+        ],function(){
+            Route::get('{disaster_id}',[
+                'uses' => 'ObservasiController@index',
+                'as' => 'observasi'
+            ]);
+            Route::get('{disaster_id}/create',[
+                'uses' => 'ObservasiController@create',
+                'as' => 'observasi.create'
+            ]);
+            Route::post('{disaster_id}/create',[
+                'uses' => 'ObservasiController@doCreate',
+                'as' => 'observasi.create.do'
+            ]);
+            Route::get('{disaster_id}/edit/{id}',[
+                'uses' => 'ObservasiController@edit',
+                'as' => 'observasi.edit'
+            ]);
+            Route::post('{disaster_id}/edit/{id}',[
+                'uses' => 'ObservasiController@doEdit',
+                'as' => 'observasi.edit.do'
+            ]);
+            Route::post('{disaster_id}/delete',[
+                'uses' => 'ObservasiController@delete',
+                'as' => 'observasi.delete.do'
+            ]);
+        });
     });
 
     Route::group([

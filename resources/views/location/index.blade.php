@@ -41,5 +41,8 @@
             </tbody>
         </table>
     </div>
+    @component('component.pagination',['paginator' => $locations])
+
+    @endcomponent
 </div>
 @endsection

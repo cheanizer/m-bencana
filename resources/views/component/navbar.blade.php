@@ -35,6 +35,7 @@
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('location',['id' => $disaster->bencanaid])}}">Lokasi</a></li>
+                            <li><a href="{{route('observasi',['disaster_id' => $disaster->bencanaid])}}">Observasi</a></li>
                         </ul>
                     </li>
                     @endif

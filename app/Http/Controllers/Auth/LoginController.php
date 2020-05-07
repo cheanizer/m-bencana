@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Disaster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +17,8 @@ class LoginController extends Controller
             return redirect()->intended('dashboard');
         }
 
+        $disaster = Disaster::where('default',1)->first();
+        $request->session()->put('disaster',$disaster);
         return redirect()->back()->with('errlogin', __("Username dan Password tidak ditemukan!"));
     }
 

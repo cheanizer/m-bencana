@@ -24,9 +24,16 @@
                             </tbody>
                         </table>
                     </div>
+                    @php
+                        function isActiveMenu($name = '')
+                        {
+                            $currentModule = \Route::current()->getName();
+                            if (strpos($currentModule,$name) !== false) echo " active ";
+                        }
+                    @endphp
                     <ul class="nav nav-list sub-menu">
-                        <li class="active"><a href="{{route('location',['id' => $disaster->bencanaid])}}">Lokasi</a></li>
-                        <li><a href="#">Observed</a></li>
+                        <li class="{{isActiveMenu('location')}}"><a href="{{route('location',['id' => $disaster->bencanaid])}}">Lokasi</a></li>
+                        <li class="{{isActiveMenu('observasi')}}"><a href="{{route('observasi',['disaster_id' => $disaster->bencanaid])}}">Observasi</a></li>
                     </ul>
                 </div>
             </div>
