@@ -14,6 +14,14 @@
         center : [ 110.434147,-7.818487],
         zoom : 9
     });
+    map.on('click',function(e){
+        var marker = new mapboxgl.Marker()
+        .setLngLat(e.lngLat)
+        .addTo(map);
+        //$("#latitude").val(e.lngLat.lat);
+        //$("#longitude").val(e.lngLat.lng);
+        //$("#map-modal").hide();
+    });
     </script>
 @endsection
 

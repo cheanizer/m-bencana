@@ -5,32 +5,38 @@
                 <i class="icon-reorder shaded"></i></a><a class="brand" href="{{url('')}}">Disaster MS </a>
                 <div class="nav-collapse collapse navbar-inverse-collapse">
                 @auth
-                <ul class="nav nav-icons">
+                <ul class="nav">
+                    <li class="dropdown">
+                        @php
+                            $disaster = session('disaster');
+                        @endphp
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="main-disaster-default">{{ empty ($disaster) ? "Pilih Bencana" : $disaster->bencana}} <b class="icon-caret-down"></b></a>
+                        <ul class="dropdown-menu" id="main-disaster-selector">
+                            @foreach (App\Models\Disaster::where('status',1)->get() as $key => $disaster )
+                            <li><a href="#" class="post-to" rel-url="{{route('disaster.using')}}" rel-id="{{$disaster->bencanaid}}">{{$disaster->bencana}}</a></li>
+                            @endforeach
+                        </ul>
+                    </li>
                     <li>
                         <a href="{{route('dashboard')}}">
-                            <i class="icon-home"></i>
+                            <i class="icon-home"></i> Beranda
                         </a>
                     </li>
+                    @if (session('disaster'))
+                    <li class="">
+                        <a href="#"><i class="icon-table"></i> Stok</a>
+                    </li>
+                    @endif
+
                 </ul>
 
-                <div class="dropdown">
-                    @php
-                        $disaster = session('disaster');
-                    @endphp
-                    <form class="navbar-search pull-left input-append" action="#">
-                    <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#" id="main-disaster-default">{{ empty ($disaster) ? "Pilih Bencana" : $disaster->bencana}} <i class="icon-caret-down"></i></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="main-disaster-selector">
-                        @foreach (App\Models\Disaster::where('status',1)->get() as $key => $disaster )
-                        <li><a href="#" class="post-to" rel-url="{{route('disaster.using')}}" rel-id="{{$disaster->bencanaid}}">{{$disaster->bencana}}</a></li>
-                        @endforeach
-                    </ul>
-                    </form>
-                </div>
+
                 <ul class="nav pull-right">
                     @if (session('disaster'))
                     @php
                         $disaster = session('disaster');
                     @endphp
+
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Data
                         <b class="caret"></b></a>
                         <ul class="dropdown-menu">

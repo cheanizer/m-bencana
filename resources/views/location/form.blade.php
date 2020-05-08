@@ -85,6 +85,9 @@
     </style>
 
 @endsection
+@section('styles')
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+@endsection
 
 @section('js')
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
@@ -161,6 +164,9 @@
                 zoom : 9
             });
             map.on('click',function(e){
+                // var marker = new mapboxgl.Marker()
+                // .setLngLat(e.lngLat)
+                // .addTo(map);
                 $("#latitude").val(e.lngLat.lat);
                 $("#longitude").val(e.lngLat.lng);
                 $("#map-modal").hide();
