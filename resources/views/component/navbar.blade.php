@@ -2,7 +2,7 @@
     <div class="navbar-inner">
         <div class="container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                <i class="icon-reorder shaded"></i></a><a class="brand" href="{{url('')}}">Disaster MS </a>
+                <i class="icon-reorder shaded"></i></a><a class="brand" href="{{url('')}}">M-Bencana </a>
                 <div class="nav-collapse collapse navbar-inverse-collapse">
                 @auth
                 <ul class="nav">
@@ -24,7 +24,7 @@
                     </li>
                     @if (session('disaster'))
                     <li class="">
-                        <a href="#"><i class="icon-table"></i> Stok</a>
+                        <a href="{{route('stock')}}"><i class="icon-table"></i> Stok</a>
                     </li>
                     @endif
 

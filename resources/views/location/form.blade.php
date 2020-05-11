@@ -11,6 +11,7 @@
             {!! Form::selectLabel('jenislokasi',App\Models\LocationType::get()->pluck('jenis_lokasi','id')->toArray(), $location->jenislokasi,'Jenis Lokasi',['class' => 'span8','placeholder' => 'Pilih Jenis Lokasi'])!!}
                 {!! Form::textLabel('namalokasi',$location->namalokasi,'Nama',['class' => 'span8'])!!}
                 {!! Form::textAreaLabel('deskripsi',$location->deskripsi,'Deskripsi',['rows' => '5','class' => 'span8'])!!}
+                {!! Form::textLabel('alamat',$location->alamat,'Alamat',['class' => 'span8'])!!}
                 {!! Form::selectLabel('propcd',App\Models\Province::get()->pluck('provinsi','id')->toArray(),
                 $location->propcd,
                 'Provinsi',

@@ -17,8 +17,10 @@ class ObservasiController extends DisasterBase
 
     public function index(Request $request)
     {
+
         $observations = Observation::orderBy('created_at','desc')
-        ->where('bencana_id',$this->disaster_id)->paginate(config('site.pagination'));
+        ->where('bencana_id',$request->get('disaster_id'))
+        ->paginate(config('site.pagination'));
 
         return $this->response('observasi.index',compact('observations'));
     }
@@ -31,12 +33,13 @@ class ObservasiController extends DisasterBase
 
     }
 
-    public function doCreate( Request $request)
+    public function doCreate(Request $request)
     {
         $request->validate($this->rules);
 
         $observasi = new Observation();
         $observasi->fill($request->only(array_keys($this->rules)));
+        $observasi->bencana_id = app('request')->get('disaster_id');
         $observasi->save();
 
         return redirect()->route('observasi',['disaster_id' => $request->get('disaster_id')])->with('popup-info','Sukses Buat Observasi');

@@ -174,6 +174,27 @@ Route::group([
             'uses' => 'LocationTypeController@delete',
             'as' => 'location.type.delete.do'
         ]);
+
+        Route::group([
+            'prefix' => 'api'
+        ],function(){
+            Route::get('list',[
+                'uses' => 'LocationApiController@list',
+                'as' => 'location.api.list'
+            ]);
+            Route::get('view/{id}',[
+                'uses' => 'LocationApiController@view',
+                'as' => 'location.api.view'
+            ]);
+            Route::get('observasi/{id}',[
+                'uses' => 'LocationApiController@observasi',
+                'as' => 'location.api.observasi'
+            ]);
+            Route::post('transaksi',[
+                'uses' => 'LocationApiController@createTransaksi',
+                'as' => 'location.api.transaksi'
+            ]);
+        });
     });
 
     Route::group([
@@ -228,6 +249,15 @@ Route::group([
         ]);
     });
 
+    Route::group([
+        'prefix' => 'stock',
+        'namespace' => 'Stock'
+    ],function(){
+        Route::get('',[
+            'uses' => 'StockController@index',
+            'as' => 'stock'
+        ]);
+    });
 
 });
 

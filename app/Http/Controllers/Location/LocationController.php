@@ -12,6 +12,7 @@ class LocationController extends DisasterBase
     protected $rules = [
         'namalokasi' => 'required',
         'deskripsi' => 'nullable',
+        'alamat' => 'nullable',
         'jenislokasi' => 'required|integer',
         'propcd' => 'required|integer',
         'kabcd' => 'required|integer',

@@ -17,12 +17,33 @@ class Location extends Model
 
     public function scopeFilter($query, $filter = [])
     {
+        extract($filter);
+
+        if (! empty ($bencanaid))
+        {
+            $query->where('bencanaid',$bencanaid);
+        }
+
+
+        if (! empty ($search))
+        {
+            $query->where(function($query) use ($search){
+                return $query->where('namalokasi','like','%'.$search.'%');
+            });
+        }
+
         return $query;
     }
+
 
     public function scopeDisaster($query,$disaster_id)
     {
         return $query->where('bencanaid',$disaster_id);
+    }
+
+    public function bencana()
+    {
+        return $this->belongsTo(Disaster::class,'bencanaid');
     }
 
     public function province()
@@ -42,6 +63,21 @@ class Location extends Model
     public function subdistrict()
     {
         return $this->belongsTo(SubDistrict::class, 'desacd');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(LocationType::class, 'jenislokasi');
+    }
+
+    public function observasi()
+    {
+        return $this->belongsToMany(Observation::class, 'observasi_lokasi','observasi_id','lokasiid');
+    }
+
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class, 'kontakid');
     }
 
 }

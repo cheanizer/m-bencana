@@ -12,13 +12,15 @@ class LoginController extends Controller
     {
         $field = $request->only('username','password');
 
+        $disaster = Disaster::where('default',1)->first();
+        $request->session()->put('disaster',$disaster);
+
         if (Auth::attempt($field))
         {
             return redirect()->intended('dashboard');
         }
 
-        $disaster = Disaster::where('default',1)->first();
-        $request->session()->put('disaster',$disaster);
+
         return redirect()->back()->with('errlogin', __("Username dan Password tidak ditemukan!"));
     }
 

@@ -38,6 +38,8 @@ class LocationTypeController extends Controller
     {
         $location_type = LocationType::findOrFail($id);
 
+
+
         return view('common.locationtype_form',compact('location_type'));
     }
 
@@ -49,7 +51,7 @@ class LocationTypeController extends Controller
 
         $location_type = LocationType::findOrFail($id);
 
-        $location_type->fill($request->only('location_type'));
+        $location_type->fill($request->only('jenis_lokasi'));
         $location_type->save();
 
 

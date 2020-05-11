@@ -15,4 +15,14 @@ class Observation extends Model
     {
         return $query;
     }
+
+    public function observasiLokasi()
+    {
+        return $this->hasOne(ObservasiLokasi::class, 'observasi_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(ObserveCategory::class, 'kategori');
+    }
 }
