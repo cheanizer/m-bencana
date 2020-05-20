@@ -55,7 +55,7 @@
                                             <button type="button" class="btn btn-default" ng-click="getLocation()">Cari</button>
                                         </form>
                                     </div>
-                                    <div class="module-body table">
+                                    <div class="module-body table table-condensed">
                                         <table class="table table-message table-hovered table-bordered table-striped">
                                             <tbody>
                                                 <tr class="heading">

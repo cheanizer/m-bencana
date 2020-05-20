@@ -106,7 +106,7 @@ angular.module('app',['ui.bootstrap','angular.http.request.loader'])
                 data : obj,
                 method : 'post'
             }).then(function(response){
-                console.log(response);
+                $uibModalInstance.dismiss();
             });
         }
     });
