@@ -33,7 +33,7 @@ angular.module('app',['ui.bootstrap','angular.http.request.loader'])
 
             $http({
                 method : 'get',
-                url : URL + 'location/api/observasi/' + lokasiid,
+                url : URL + 'location/api/observasi_order/' + lokasiid,
                 params : {}
             }).then(function(response){
                 $scope.observations = response.data;

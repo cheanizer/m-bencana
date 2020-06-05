@@ -6,6 +6,7 @@ use App\Models\Location;
 use App\Models\ObservasiLokasi;
 use App\Models\ObservasiTransaksi;
 use App\Models\Observation;
+use App\Models\ObserveCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -42,6 +43,29 @@ class LocationApiController extends Controller
         ->select('observasi.id','observasi.nama','observasi.deskripsi','observasi_kategori.title','observasi_lokasi.posisi_jumlah')
         ->whereNull('observasi.deleted_at')
         ->get();
+        return response()->json($results);
+    }
+
+    public function observasiOrdered($location_id,Request $request)
+    {
+        $lokasi = Location::findOrFail($location_id);
+
+        $kategori = ObserveCategory::orderBy('order','desc')->get();
+        $results = [];
+        foreach ($kategori as $key => $cat)
+        {
+            $cat->observasies = DB::table('observasi')->leftJoin('observasi_lokasi',function($join) use ($lokasi){
+                $join->on('observasi.id','=','observasi_lokasi.observasi_id');
+                $join->where('observasi_lokasi.lokasiid','=',$lokasi->lokasiid);
+            })
+            ->join('observasi_kategori','observasi_kategori.id','=','observasi.kategori')
+            ->select('observasi.id','observasi.nama','observasi.deskripsi','observasi_kategori.title','observasi_lokasi.posisi_jumlah')
+            ->whereNull('observasi.deleted_at')
+            ->where('observasi.kategori',$cat->id)
+            ->get();
+
+            array_push($results, $cat);
+        }
 
         return response()->json($results);
     }
@@ -67,9 +91,9 @@ class LocationApiController extends Controller
         $trans->bencanaid = $lokasi->lokasiid;
         $trans->save();
 
-        $lokasiObservasi = ObservasiLokasi::firstOrNew([
+        $lokasiObservasi = ObservasiLokasi::firstOrCreate([
             'observasi_id' => $trans->observasi_id,
-            'lokasiid' => $trans->lokasi_id
+            'lokasiid' => $trans->lokasiid
         ]);
 
         if ($trans->type == 'penambahan')

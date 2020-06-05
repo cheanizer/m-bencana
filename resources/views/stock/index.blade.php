@@ -81,27 +81,33 @@
                                     </div>
                                     <div class="module-body table">
                                         <div style="padding:5px" ng-if="location">
-                                            <h4>@{{location.namalokasi}}</h4>
-                                            <address>
+                                            <h4 style="margin: 0px 0;">@{{location.namalokasi}}</h4>
+                                            <address style="margin-bottom:0px">
                                                 <small>
-                                                @{{location.alamat}}<br>
-                                                @{{location.subdistrict.kelurahan}},@{{location.district.kecamatan}}, <br>
-                                                @{{location.state.kabupaten_kota}},@{{location.province.provinsi}} <br>
+                                                @{{location.alamat}}
+                                                @{{location.subdistrict.kelurahan}},@{{location.district.kecamatan}},
+                                                @{{location.state.kabupaten_kota}},@{{location.province.provinsi}}
                                                 <span ng-if="location.contact">Kontak : @{{location.contact.nama}} (@{{location.contact.phone}})</span>
                                                 </small>
                                             </address>
                                         </div>
-                                        <table class="table table-message table-condensed table-hovered table-bordered table-striped" ng-if="location">
+
+                                        <table class="table table-message table-condensed table-hovered table-bordered table-striped"
+                                         ng-if="location"
+                                         ng-repeat="(key, cat) in observations"
+                                         style="margin-bottom: 10px"
+                                         >
                                             <tbody>
+                                                <tr>
+                                                    <td class="cell-title" style="text-align: center; font-weight:bold" colspan="3">@{{cat.title}}</td>
+                                                </tr>
                                                 <tr class="heading">
                                                     <td class="cell-title">Nama</td>
-                                                    <td class="cell-title">Kategori</td>
                                                     <td class="cell-title">Jumlah</td>
                                                     <td></td>
                                                 </tr>
-                                                <tr ng-repeat="(key, observasi) in observations">
-                                                    <td>@{{observasi.nama}}</td>
-                                                    <td>@{{observasi.title}}</td>
+                                                <tr ng-repeat="(key, observasi) in cat.observasies">
+                                                    <td style="width: 200px">@{{observasi.nama}}</td>
                                                     <td>@{{observasi.posisi_jumlah}}</td>
                                                     <td align="right" style="text-align: right">
                                                         <button class="btn btn-default btn-xs" ng-click="showModal(observasi,location)">Buat Transaksi</button>
@@ -110,6 +116,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <div style="margin-bottom: 5px"></div>
 
                                         <div class="alert alert-info" ng-if="!location">
                                             Silahkan pilih lokasi

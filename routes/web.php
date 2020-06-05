@@ -190,6 +190,10 @@ Route::group([
                 'uses' => 'LocationApiController@observasi',
                 'as' => 'location.api.observasi'
             ]);
+
+            Route::get('observasi_order/{location_id}','LocationApiController@observasiOrdered')
+            ->name('location.api.observasi_order');
+
             Route::post('transaksi',[
                 'uses' => 'LocationApiController@createTransaksi',
                 'as' => 'location.api.transaksi'
@@ -197,10 +201,28 @@ Route::group([
         });
     });
 
+
     Route::group([
         'prefix' => 'observasi',
         'namespace' => 'Observasi'
     ],function(){
+
+        Route::group([
+            'prefix' => 'kategori'
+        ],function()
+        {
+            Route::get('','CategoryObservasiController@index')
+            ->name('observasi.kategori');
+            Route::get('create','CategoryObservasiController@create')
+            ->name('observasi.kategori.create');
+            Route::get('edit/{id}','CategoryObservasiController@edit')
+            ->name('observasi.kategori.edit');
+            Route::post('edit/{id}','CategoryObservasiController@doEdit')
+            ->name('observasi.kategori.edit.do');
+            Route::get('up/{id}','CategoryObservasiController@up')
+            ->name('observasi.kategori.up');
+        });
+
         Route::group([
             'middleware' => 'disaster'
         ],function(){
@@ -228,6 +250,10 @@ Route::group([
                 'uses' => 'ObservasiController@delete',
                 'as' => 'observasi.delete.do'
             ]);
+
+
+
+
         });
     });
 
