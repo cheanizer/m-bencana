@@ -24,7 +24,7 @@
                     </li>
                     @if (session('disaster'))
                     <li class="">
-                        <a href="{{route('stock')}}"><i class="icon-table"></i> Stok</a>
+                        <a href="{{route('stock')}}"><i class="icon-table"></i> Observasi</a>
                     </li>
                     @endif
 

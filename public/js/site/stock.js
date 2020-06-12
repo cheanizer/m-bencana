@@ -104,7 +104,7 @@ angular.module('app',['ui.bootstrap','angular.http.request.loader'])
             $http({
                 url : URL + 'location/api/transaksi/',
                 data : obj,
-                method : 'post'
+                method : 'POST'
             }).then(function(response){
                 $uibModalInstance.dismiss();
             });
