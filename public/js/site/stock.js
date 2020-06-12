@@ -68,7 +68,6 @@ angular.module('app',['ui.bootstrap','angular.http.request.loader'])
             origin_jumlah = 0;
             console.log('gitu');
         }
-        console.log(origin_jumlah);
         $scope.observasi = data.observasi;
         $scope.location = data.location;
         $scope.mode = 'penjumlahan';

@@ -17,7 +17,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($field))
         {
-            return redirect()->intended('dashboard');
+            return redirect()->route('landing');
         }
 
 

@@ -1,129 +1,110 @@
 @extends('layouts.main')
 
 @section('js')
-    <script>
-        $("document").ready(function(){
-            var d1 = [ [0, 1], [1, 14], [2, 5], [3, 4], [4, 5], [5, 1], [6, 14], [7, 5],  [8, 5] ];
-		    var d2 = [ [0, 5], [1, 2], [2, 10], [3, 1], [4, 9],  [5, 5], [6, 2], [7, 10], [8, 8] ];
-            var plot = $.plot($("#placeholder2"),
-			   [ { data: d1, label: "Data Y"}, { data: d2, label: "Data X" } ], {
-					lines: {
-						show: true,
-						fill: true, /*SWITCHED*/
-						lineWidth: 2
-					},
-					points: {
-						show: true,
-						lineWidth: 5
-					},
-					grid: {
-						clickable: true,
-						hoverable: true,
-						autoHighlight: true,
-						mouseActiveRadius: 10,
-						aboveData: true,
-						backgroundColor: "#fafafa",
-						borderWidth: 0,
-						minBorderMargin: 25,
-					},
-					colors: [ "#090", "#099",  "#609", "#900"],
-					shadowSize: 0
-				 });
-        });
+<script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlYW5pemVyIiwiYSI6ImNqOG9xaWhhcDA2eHcycXJzMWZoMzM0ejUifQ.YIWgUlQXfyo5kOACQeXrjA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/cheanizer/ck8vjqmau202s1irleyx3dfg8',
+        center : [ 110.434147,-7.818487],
+        zoom : 10
+    });
+    map.on('click',function(e){
+        var marker = new mapboxgl.Marker()
+        .setLngLat(e.lngLat)
+        .addTo(map);
+        //$("#latitude").val(e.lngLat.lat);
+        //$("#longitude").val(e.lngLat.lng);
+        //$("#map-modal").hide();
+    });
     </script>
+@endsection
+
+@section('styles')
+    <style>
+        .row-loc th
+        {
+            background-color: #29b7d3;
+            color: antiquewhite;
+        }
+        .row-head1 th
+        {
+            background-color: #cecece;
+        }
+        .row-head2 td
+        {
+            background-color: #efefef;
+        }
+    </style>
 @endsection
 
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="span9">
+        @if ($disaster)
+        <div class="span12">
             <div class="content">
                 <div class="module">
                     <div class="module-head">
-                        <h3>Grafik Permintaan dan Ketersediaan Barang</h3>
+                        <h3>Peta Lokasi Kebencanaan</h3>
                     </div>
-                    <div class="module-body">
-                        <div class="chart inline-legend grid">
-                            <div id="placeholder2" class="graph" style="height: 500px"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="module hide">
-                    <div class="module-head">
-                        <h3>
-                            Adjust Budget Range</h3>
-                    </div>
-                    <div class="module-body">
-                        <div class="form-inline clearfix">
-                            <a href="#" class="btn pull-right">Update</a>
-                            <label for="amount">
-                                Price range:</label>
-                            &nbsp;
-                            <input type="text" id="amount" class="input-" />
-                        </div>
-                        <hr />
-                        <div class="slider-range">
-                        </div>
-                    </div>
+                        <div id='map' style='width: 100%; height: 420px;'></div>
                 </div>
             </div>
         </div>
-        <div class="span3">
+        <div class="span12">
             <div class="content">
                 <div class="module">
-                    @auth
                     <div class="module-head">
-                        <h3>Menu</h3>
+                        <h3>Informasi Data Jumlah Dan Lokasi Kebencanaan</h3>
                     </div>
-                    <div class="module-body">
-                        Selamat datang
-                        <br />
-                        {{Auth::user()->name}}
-                        <hr />
-                        <div class="text-center">
-                        <form action="{{route('auth.logout')}}" method="post">
-                            @csrf
-                            <button class="btn btn-default" type="submit">logout</button>
-                        </form>
-                        </div>
-                    </div>
-                    @endauth
-                    @guest
-                        <form class="form-vertical" action="{{route('auth.authenticate')}}" method="POST">
-                            @csrf
-                            <div class="module-head">
-                                <h3>Masuk</h3>
-                            </div>
-                            <div class="module-body">
-                                @if (session('errlogin'))
-                                <div class="alert alert-warning">{{session('errlogin')}}</div>
-                            @endif
-                                <div class="control-group">
-                                    <div class="controls row-fluid">
-                                        <input class="span12" type="text" name="username" id="inpUsername" placeholder="Username">
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <div class="controls row-fluid">
-                                        <input class="span12" type="password" name="password" id="inputPassword" placeholder="Password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="module-foot">
-                                <div class="control-group">
-                                    <div class="controls clearfix">
-                                        <button type="submit" class="btn btn-primary pull-right">Login</button>
-                                        <label class="checkbox">
-                                            <input type="checkbox"> Remember me
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    @endguest
+                    <table class="table table-condensed table-bordered">
+                        <tr>
+                            <th colspan="2" style="text-align: center">Bencana {{$disaster->bencana}}</th>
+                        </tr>
+                        @foreach ($locations as $kl => $location)
+                        <tr class="row-loc">
+                            <th>{{$location->namalokasi }}</th>
+                            <th>{{$location->type->jenis_lokasi }}</th>
+                        </tr>
+                        <tr class="row-head1">
+                            <th>Observasi</th>
+                            <th>Jumlah</th>
+                        </tr>
+                        @php
+                            $cats =  \App\Models\ObserveCategory::orderBy('order','desc')->get();
+                        @endphp
+                        @foreach ($cats as $cat)
+                            <tr class="row-head2">
+                                <td  colspan="2">{{$cat->title}}</td>
+                            </tr>
+                            @php
+                                $results = DB::table('observasi')->leftJoin('observasi_lokasi',function($join) use ($location){
+                                    $join->on('observasi.id','=','observasi_lokasi.observasi_id');
+                                    $join->where('observasi_lokasi.lokasiid','=',$location->lokasiid);
+                                })
+                                ->join('observasi_kategori','observasi_kategori.id','=','observasi.kategori')
+                                ->select('observasi.id','observasi.nama','observasi.deskripsi','observasi_kategori.title','observasi_lokasi.posisi_jumlah')
+                                ->whereNull('observasi.deleted_at')
+                                ->where('observasi.kategori',$cat->id)
+                                ->get();
+                            @endphp
+                            @foreach ($results as $key => $obs)
+                                <tr>
+                                    <td>{{$obs->nama}}</td>
+                                    <td>{{$obs->posisi_jumlah ? $obs->posisi_jumlah : 0 }}</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+
+
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </div>
 @endsection

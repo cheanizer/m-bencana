@@ -17,11 +17,6 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li>
-                        <a href="{{route('dashboard')}}">
-                            <i class="icon-home"></i> Beranda
-                        </a>
-                    </li>
                     @if (session('disaster'))
                     <li class="">
                         <a href="{{route('stock')}}"><i class="icon-table"></i> Observasi</a>
@@ -73,6 +68,9 @@
                     <ul class="nav pull-right">
                         <li>
                             <a href="#">Tentang Kami</a>
+                        </li>
+                        <li>
+                            <a href="/login">Masuk</a>
                         </li>
                     </ul>
                     @endguest
