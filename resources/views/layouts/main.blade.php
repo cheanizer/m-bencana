@@ -83,7 +83,4 @@
         @section('js')
 
         @show
-
-
-
     </body>

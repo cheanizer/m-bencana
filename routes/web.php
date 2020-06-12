@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','Landing\LandingController@index')->name('landing');
-
+Route::group([
+    'prefix' => 'landing',
+    'namespace' => 'Landing'
+],function()
+{
+    Route::get('api/location/list','LocationApiController@list');
+});
 
 Route::group([
     'middleware' => 'auth'

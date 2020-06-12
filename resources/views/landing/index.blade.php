@@ -3,6 +3,7 @@
 @section('js')
 <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
 <script>
+    var URL = "{{url('')}}/";
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlYW5pemVyIiwiYSI6ImNqOG9xaWhhcDA2eHcycXJzMWZoMzM0ejUifQ.YIWgUlQXfyo5kOACQeXrjA';
     var map = new mapboxgl.Map({
         container: 'map',
@@ -17,6 +18,22 @@
         //$("#latitude").val(e.lngLat.lat);
         //$("#longitude").val(e.lngLat.lng);
         //$("#map-modal").hide();
+    });
+    $("document").ready(function(){
+        console.log(URL);
+        $.ajax({
+            url : URL + 'landing/api/location/list',
+            method : 'get',
+            dataType : 'JSON',
+            success : function(response){
+                $.each(response,function(key,value){
+                    console.log(value);
+                    var marker = new mapboxgl.Marker()
+        .setLngLat([value.longitude,value.latitude])
+        .addTo(map);
+                });
+            }
+        });
     });
     </script>
 @endsection
