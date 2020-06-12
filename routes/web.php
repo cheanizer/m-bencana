@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing.index');
-})->name('landing');
+Route::get('/','Landing\LandingController@index')->name('landing');
 
 
 Route::group([

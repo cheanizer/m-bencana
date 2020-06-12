@@ -100,11 +100,10 @@ angular.module('app',['ui.bootstrap','angular.http.request.loader'])
                 keterangan : $scope.form.keterangan,
                 sumber_tujuan : $scope.form.sumber_tujuan
             }
-
             $http({
-                url : URL + 'location/api/transaksi/',
+                url : URL + 'location/api/transaksi',
                 data : obj,
-                method : 'POST'
+                method : 'post'
             }).then(function(response){
                 $uibModalInstance.dismiss();
             });
