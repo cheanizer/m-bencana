@@ -20,6 +20,7 @@ Route::group([
 ],function()
 {
     Route::get('api/location/list','LocationApiController@list');
+    Route::get('api/location/observasi/{id}','LocationApiController@observasi');
 });
 
 Route::group([

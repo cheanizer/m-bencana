@@ -31,15 +31,28 @@
                     marker.getElement().addEventListener('click',function(e){
                         $(".loading").show();
                         $.ajax({
-                            url : URL + 'landing/api/location/list',
+                            url : URL + 'landing/api/location/observasi/' + value.lokasiid,
                             method : 'get',
                             dataType : 'JSON',
-                            success : function(response)
+                            success : function(res)
                             {
-                                $(".loading").hide();
-                                var popup = new mapboxgl.Popup({ offset: 25 })
-                                .setHTML("halogan");
-                                marker.setPopup(popup).togglePopup();
+                                console.log(res.length)
+                                var html = '<h4>'+value.namalokasi+'</h4>';
+                                html += '<table class="table table-bordered"><tr><th>Jenis</th><th>Jumlah</th></tr>';
+                                $.each(res,function(k,v){
+                                    html += '<tr><td>'+v.nama+'</td><td>'+v.posisi_jumlah+'</td></tr>'
+                                    if (k === (res.length - 1))
+                                    {
+                                        html += "</table>";
+                                        $(".loading").hide();
+                                        var popup = new mapboxgl.Popup({ offset: 25 })
+                                        .setHTML(html);
+                                        marker.setPopup(popup).togglePopup();
+
+                                    }
+                                });
+
+
                             }
                         })
                     });
